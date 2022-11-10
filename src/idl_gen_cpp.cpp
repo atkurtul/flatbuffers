@@ -1428,11 +1428,14 @@ class CppGenerator : public BaseGenerator {
       code_ += "  void Reset();";
       code_ += "";
       if (!enum_def.uses_multiple_type_instances) {
+        code_ += "  template<class T>";
+        code_ += "  using Traits = {{NAME}}UnionTraits<T>;";
+        code_ += "";
         code_ += "  template <typename T>";
         code_ += "  void Set(T&& val) {";
         code_ += "    typedef typename std::remove_reference<T>::type RT;";
         code_ += "    Reset();";
-        code_ += "    type = {{NAME}}UnionTraits<RT>::enum_value;";
+        code_ += "    type = Traits<RT>::enum_value;";
         code_ += "    if (type != {{NONE}}) {";
         code_ += "      value = new RT(std::forward<T>(val));";
         code_ += "    }";
