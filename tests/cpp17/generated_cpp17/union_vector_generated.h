@@ -235,11 +235,14 @@ struct GadgetUnion {
 
   void Reset();
 
+  template<class T>
+  using Traits = GadgetUnionTraits<T>;
+
   template <typename T>
   void Set(T&& val) {
     typedef typename std::remove_reference<T>::type RT;
     Reset();
-    type = GadgetUnionTraits<RT>::enum_value;
+    type = Traits<RT>::enum_value;
     if (type != Gadget::NONE) {
       value = new RT(std::forward<T>(val));
     }

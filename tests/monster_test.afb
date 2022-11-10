@@ -2046,7 +2046,7 @@ table (reflection.Field):
   +0x137C | 40 00 00 00             | UOffset32   | 0x00000040 (64) Loc: +0x13BC       | offset to field `type` (table)
   +0x1380 | 18 00 00 00             | UOffset32   | 0x00000018 (24) Loc: +0x1398       | offset to field `attributes` (vector)
   +0x1384 | 10 00 00 00             | UOffset32   | 0x00000010 (16) Loc: +0x1394       | offset to field `documentation` (vector)
-  +0x1388 | 00 00 00 00 00 00 F8 7F | double      | 0x7FF8000000000000 (nan)           | table field `default_real` (Double)
+  +0x1388 | FF FF FF FF FF FF FF 7F | double      | 0x7FFFFFFFFFFFFFFF (nan)           | table field `default_real` (Double)
   +0x1390 | 00 00 00 00             | uint8_t[4]  | ....                               | padding
 
 vector (reflection.Field.documentation):

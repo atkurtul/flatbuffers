@@ -135,11 +135,14 @@ struct EquipmentUnion {
 
   void Reset();
 
+  template<class T>
+  using Traits = EquipmentUnionTraits<T>;
+
   template <typename T>
   void Set(T&& val) {
     typedef typename std::remove_reference<T>::type RT;
     Reset();
-    type = EquipmentUnionTraits<RT>::enum_value;
+    type = Traits<RT>::enum_value;
     if (type != Equipment_NONE) {
       value = new RT(std::forward<T>(val));
     }

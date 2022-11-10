@@ -315,11 +315,14 @@ struct AnyUnion {
 
   void Reset();
 
+  template<class T>
+  using Traits = AnyUnionTraits<T>;
+
   template <typename T>
   void Set(T&& val) {
     typedef typename std::remove_reference<T>::type RT;
     Reset();
-    type = AnyUnionTraits<RT>::enum_value;
+    type = Traits<RT>::enum_value;
     if (type != Any_NONE) {
       value = new RT(std::forward<T>(val));
     }
@@ -471,11 +474,14 @@ struct AnyUniqueAliasesUnion {
 
   void Reset();
 
+  template<class T>
+  using Traits = AnyUniqueAliasesUnionTraits<T>;
+
   template <typename T>
   void Set(T&& val) {
     typedef typename std::remove_reference<T>::type RT;
     Reset();
-    type = AnyUniqueAliasesUnionTraits<RT>::enum_value;
+    type = Traits<RT>::enum_value;
     if (type != AnyUniqueAliases_NONE) {
       value = new RT(std::forward<T>(val));
     }
